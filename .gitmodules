@@ -1,0 +1,3 @@
+[submodule "sfdx-cli"]
+	path = sfdx-cli
+	url = ssh://aur@aur.archlinux.org/sfdx-cli.git

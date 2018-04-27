@@ -2,6 +2,12 @@
 
 set -euf -o pipefail
 
+# Usage within current repo:
+# - `cd sfdx-cli`
+# - `../scripts/generate-sfdx-cli-pkgbuild.sh`
+# - `git diff sfdx-cli`
+# - If there are changes, copy PKGBUILD and .SRCINFO to AUR repo, commit and push
+
 OUTPUT_DIR=${1:-`pwd`}
 
 # Get and parse the manifest file from Salesforce

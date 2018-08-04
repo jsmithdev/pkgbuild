@@ -34,6 +34,7 @@ url="https://developer.salesforce.com/tools/sfdxcli"
 license=('unknown')
 optdepends=('gnome-keyring: saving default credentials')
 provides=('sfdx-cli')
+options=(!strip)
 conflicts=()
 source_i686=(${sfdx_download_i686_url})
 source_x86_64=(${sfdx_download_x86_64_url})

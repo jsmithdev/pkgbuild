@@ -3,14 +3,11 @@ pkgbase = sfdx-cli
 	pkgver = 7.1.4_79f97a7df8
 	pkgrel = 1
 	url = https://developer.salesforce.com/tools/sfdxcli
-	arch = i686
 	arch = x86_64
 	license = unknown
 	optdepends = gnome-keyring: saving default credentials
 	provides = sfdx-cli
 	options = !strip
-	source_i686 = null
-	sha256sums_i686 = null
 	source_x86_64 = https://developer.salesforce.com/media/salesforce-cli/sfdx-cli/channels/stable/sfdx-cli-v7.1.4-79f97a7df8-linux-x64.tar.xz
 	sha256sums_x86_64 = c8c71571e50eb21c7ff537fe9ab7f42fc0a4333bf1dc02100256d48f67483e6b
 

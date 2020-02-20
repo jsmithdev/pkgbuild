@@ -7,5 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Debug ls
+        run: ls
+      - name: Debug pwd
+        run: pwd
       - name: Test Package
         uses: ./.github/actions/sfdx-test

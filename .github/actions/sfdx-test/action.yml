@@ -2,4 +2,4 @@ name: 'SFDX-CLI Test'
 description: 'Test installing SFDX-CLI AUR Package'
 runs:
   using: 'docker'
-  image: 'Dockerfile-sfdx'
+  image: 'Dockerfile'

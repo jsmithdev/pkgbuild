@@ -7,6 +7,8 @@ RUN pacman --noconfirm -Syu base-devel
 USER builduser
 
 WORKDIR /home/builduser
+RUN ls /
+RUN ls /github
 RUN ls /github/workspace
 RUN mkdir -p package
 COPY /github/workspace/scripts/sfdx-entrypoint.sh sfdx-entrypoint.sh

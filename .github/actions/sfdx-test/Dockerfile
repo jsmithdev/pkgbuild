@@ -12,4 +12,4 @@ COPY sfdx-entrypoint.sh sfdx-entrypoint.sh
 COPY sfdx-cli/.SRCINFO package/.SRCINFO
 COPY sfdx-cli/PKGBUILD package/PKGBUILD
 
-ENTRYPOINT ["./sfdx-entrypoint.sh"]
+ENTRYPOINT ["/home/builduser/sfdx-entrypoint.sh"]

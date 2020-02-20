@@ -8,8 +8,8 @@ USER builduser
 
 WORKDIR /home/builduser
 RUN mkdir -p package
-COPY /github/workspace/scripts/sfdx-entrypoint.sh sfdx-entrypoint.sh
-COPY /github/workspace/sfdx-cli/.SRCINFO package/.SRCINFO
-COPY /github/workspace/sfdx-cli/PKGBUILD package/PKGBUILD
+COPY ../../../scripts/sfdx-entrypoint.sh sfdx-entrypoint.sh
+COPY ../../../github/workspace/sfdx-cli/.SRCINFO package/.SRCINFO
+COPY ../../../github/workspace/sfdx-cli/PKGBUILD package/PKGBUILD
 
 ENTRYPOINT ["./sfdx-entrypoint.sh"]

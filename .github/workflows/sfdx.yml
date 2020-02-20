@@ -8,6 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Copy files into Docker context directory
-        runs: cp -R ./sfdx-cli ./.github/actions/sfdx-test
+        run: cp -R ./sfdx-cli ./.github/actions/sfdx-test
       - name: Test Package
         uses: ./.github/actions/sfdx-test

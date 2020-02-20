@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
-cd package
+cd /home/builduser/package
 makepkg --noconfirm -si
 SRC_VERSION=$(grep "pkgver" .SRCINFO | cut -f2 -d '=' | xargs)
 INSTALLED_VERSION=$(sfdx --version | cut -f1 -d' ' | cut -f 2 -d '/')

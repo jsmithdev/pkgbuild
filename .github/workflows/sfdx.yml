@@ -18,5 +18,6 @@ jobs:
         uses: devmasx/merge-branch@v1.1.0
         with:
           target_branch: 'master'
+          label_name: 'sfdx-cli'
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

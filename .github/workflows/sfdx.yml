@@ -11,3 +11,5 @@ jobs:
         run: cp -R ./sfdx-cli ./.github/actions/sfdx-test
       - name: Test Package
         uses: ./.github/actions/sfdx-test
+      - name: Clean up
+        run: rm -rf ./.github/actions/sfdx-test

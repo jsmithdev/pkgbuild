@@ -11,7 +11,7 @@ set -euf -o pipefail
 OUTPUT_DIR=${1:-`pwd`}
 
 # Get and parse the manifest file from Salesforce
-manifest_content=$(curl https://developer.salesforce.com/media/salesforce-cli/manifest.json)
+manifest_content=$(curl -s https://developer.salesforce.com/media/salesforce-cli/manifest.json)
 sfdx_original_version=$(echo "$manifest_content" | jq '.version')
 # PKGBUILD pkgver does not accept dash, so we convert that to underscore
 sfdx_version=${sfdx_original_version//-/_}
@@ -48,6 +48,8 @@ package() {
 }
 sha256sums_x86_64=(${sfdx_download_x86_64_sha256})
 EOF
-pushd "${OUTPUT_DIR}"
+pushd "${OUTPUT_DIR}" > /dev/null
 makepkg --printsrcinfo > .SRCINFO
-popd
+popd > /dev/null
+
+grep "pkgver" .SRCINFO | cut -f2 -d '=' | xargs

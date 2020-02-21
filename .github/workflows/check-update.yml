@@ -1,0 +1,25 @@
+name: Check new SFDX version
+
+on:
+  repository_dispatch:
+    types: manual-sfdx-update
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate new pkgbuild
+        id: generate-pkgbuild
+        run: cd sfdx-cli && echo ::set-output name=version::$(../scripts/generate-sfdx-cli-pkgbuild.sh)
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        with:
+          commit-message: 'Updated sfdx-cli to version ${{ steps.generate-pkgbuild.outputs.version }}'
+          title: 'Update sfdx-cli'
+          branch: updates/sfdx-cli
+          labels: sfdx-cli

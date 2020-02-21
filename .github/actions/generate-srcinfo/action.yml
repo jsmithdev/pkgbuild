@@ -1,0 +1,5 @@
+name: 'Generate SRCINFO'
+description: 'Generate SRCINFO file from PKGBUILD'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

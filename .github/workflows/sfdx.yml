@@ -13,3 +13,8 @@ jobs:
         uses: ./.github/actions/sfdx-test
       - name: Clean up
         run: rm -rf ./.github/actions/sfdx-test
+      - name: Merge
+        if: success() and github.ref == 'refs/heads/updates/sfdx-cli'
+        uses: devmasx/merge-branch@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

@@ -12,9 +12,9 @@ jobs:
       - name: Test Package
         uses: ./.github/actions/sfdx-test
       - name: Clean up
-        run: rm -rf ./.github/actions/sfdx-test && echo '${{ github.ref }}' && echo '${{ github.head_ref }}' && echo '${{ github.base_ref }}'
+        run: rm -rf ./.github/actions/sfdx-test
       - name: Merge
-        if: success() && github.ref == 'refs/heads/updates/sfdx-cli'
+        if: success() && github.head_ref == 'updates/sfdx-cli'
         uses: devmasx/merge-branch@v1.1.0
         with:
           target_branch: 'master'

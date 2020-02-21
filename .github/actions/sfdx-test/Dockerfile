@@ -1,12 +1,5 @@
-FROM archlinux:latest
+FROM dangmai/archlinux-devel:latest
 
-RUN useradd builduser -m \
-  && passwd -d builduser \
-  && printf 'builduser ALL=(ALL) ALL\n' | tee -a /etc/sudoers # Allow the builduser passwordless sudo
-RUN pacman --noconfirm -Syu base-devel
-USER builduser
-
-WORKDIR /home/builduser
 RUN mkdir -p package
 COPY sfdx-entrypoint.sh sfdx-entrypoint.sh
 COPY sfdx-cli/.SRCINFO package/.SRCINFO

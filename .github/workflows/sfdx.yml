@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Copy private key to Git Docker image
-        run: echo "${{ secrets.AUR_PRIVATE_KEY }}" > ./.github/actions/aur/id_rsa
+        run: ls . && ls ./.github && ls ./.github/actions && ls ./.github/actions/aur && echo "${{ secrets.AUR_PRIVATE_KEY }}" > ./.github/actions/aur/id_rsa
       - name: Handle AUR Git repository
         uses: ./.github/actions/aur
       - name: Clean up private key

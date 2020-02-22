@@ -12,5 +12,5 @@ if [ -n "$(git status -s)" ]; then
   git config user.name "Dang Mai"
   git config user.email "contact@dangmai.net"
   git commit -m "Updated to ${VERSION}"
-  #git push origin master
+  git push origin master
 fi

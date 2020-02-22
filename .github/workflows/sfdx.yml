@@ -15,9 +15,8 @@ jobs:
         run: rm -rf ./.github/actions/sfdx-test
       - name: Merge
         if: success() && github.head_ref == 'updates/sfdx-cli'
-        uses: devmasx/merge-branch@v1.1.0
-        with:
-          target_branch: 'master'
-          label_name: 'sfdx-cli'
+        uses: pascalgn/automerge-action@v0.7.5
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          MERGE_LABELS: sfdx-cli
+          MERGE_METHOD: rebase

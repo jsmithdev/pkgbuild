@@ -7,7 +7,7 @@ cp /PKGBUILD .
 cp /.SRCINFO .
 VERSION=$(grep "pkgver" .SRCINFO | cut -f2 -d '=' | xargs)
 if [ -n "$(git status -s)" ]; then
-  git diff --no-pager
+  git --no-pager diff
   git add .
   git config user.name "Dang Mai"
   git config user.email "contact@dangmai.net"

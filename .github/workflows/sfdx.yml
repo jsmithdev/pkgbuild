@@ -1,4 +1,4 @@
-name: Build and Test SFDX-CLI
+name: Test and Release SFDX-CLI
 
 on: [push, pull_request]
 
@@ -7,12 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Copy private key to Git Docker image
-        run: echo "${{ secrets.AUR_PRIVATE_KEY }}" > ./.github/actions/aur/id_rsa
-      - name: Handle AUR Git repository
-        uses: ./.github/actions/aur
-      - name: Clean up private key
-        run: rm ./.github/actions/aur/id_rsa
       - name: Copy files into Docker context directory
         run: cp -R ./sfdx-cli ./.github/actions/sfdx-test
       - name: Test Package
@@ -26,3 +20,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           MERGE_LABELS: "" # Somehow the workflow does not see the label set by earlier workflows
           MERGE_METHOD: rebase
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Copy private key to Git Docker image
+        run: echo "${{ secrets.AUR_PRIVATE_KEY }}" > ./.github/actions/aur/id_rsa
+      - name: Copy package files to Git Docker image
+        run: cp -R sfdx-cli/. ./.github/actions/aur/
+      - name: Handle AUR Git repository
+        uses: ./.github/actions/aur

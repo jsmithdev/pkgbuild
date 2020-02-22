@@ -1,0 +1,5 @@
+name: 'Handle AUR Git repository'
+description: 'Handle AUR Git repository'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

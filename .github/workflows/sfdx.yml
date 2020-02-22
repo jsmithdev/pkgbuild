@@ -6,6 +6,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Copy private key to Git Docker image
+        run: echo "${{ secrets.AUR_PRIVATE_KEY }}" > ./.github/actions/aur/id_rsa
+      - name: Handle AUR Git repository
+        uses: ./.github/actions/aur
+      - name: Clean up private key
+        run: rm ./.github/actions/aur/id_rsa
       - uses: actions/checkout@v2
       - name: Copy files into Docker context directory
         run: cp -R ./sfdx-cli ./.github/actions/sfdx-test

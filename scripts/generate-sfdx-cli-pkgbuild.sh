@@ -9,8 +9,8 @@ manifest_content=$(curl -s https://developer.salesforce.com/media/salesforce-cli
 sfdx_original_version=$(echo "$manifest_content" | jq '.version')
 # PKGBUILD pkgver does not accept dash, so we convert that to underscore
 sfdx_version=${sfdx_original_version//-/_}
-sfdx_download_x86_64_url=$(echo "$manifest_content" | jq '.archives."linux-x64".url')
-sfdx_download_x86_64_sha256=$(echo "$manifest_content" | jq '.archives."linux-x64".sha256')
+sfdx_download_x86_64_url=$(echo "$manifest_content" | jq '.downloads."linux-x64".url')
+sfdx_download_x86_64_sha256=$(echo "$manifest_content" | jq '.downloads."linux-x64".sha256')
 
 # Generate PKGBUILD based on template
 cat << EOF > "${OUTPUT_DIR}/PKGBUILD"

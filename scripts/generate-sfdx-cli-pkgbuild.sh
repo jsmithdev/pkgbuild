@@ -5,12 +5,12 @@ set -euf -o pipefail
 OUTPUT_DIR=${1:-`pwd`}
 
 # Get and parse the manifest file from Salesforce
-manifest_content=$(curl -s https://developer.salesforce.com/media/salesforce-cli/manifest.json)
+manifest_content=$(curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx-cli/channels/stable/linux-x64)
 sfdx_original_version=$(echo "$manifest_content" | jq '.version')
 # PKGBUILD pkgver does not accept dash, so we convert that to underscore
 sfdx_version=${sfdx_original_version//-/_}
-sfdx_download_x86_64_url=$(echo "$manifest_content" | jq '.downloads."linux-x64".url')
-sfdx_download_x86_64_sha256=$(echo "$manifest_content" | jq '.downloads."linux-x64".sha256')
+sfdx_download_x86_64_url=https://developer.salesforce.com/media/salesforce-cli/sfdx-cli/channels/stable/sfdx-cli-linux-x64.tar.gz
+sfdx_download_x86_64_sha256=$(echo "$manifest_content" | jq '.sha256gz')
 
 # Generate PKGBUILD based on template
 cat << EOF > "${OUTPUT_DIR}/PKGBUILD"

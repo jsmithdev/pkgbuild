@@ -21,15 +21,16 @@ jobs:
           MERGE_LABELS: "" # Somehow the workflow does not see the label set by earlier workflows
           MERGE_METHOD: rebase
 
-  release:
-    needs: test
-    runs-on: ubuntu-latest
+  # release:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/master'
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Copy private key to Git Docker image
-        run: echo "${{ secrets.AUR_PRIVATE_KEY }}" > ./.github/actions/aur/id_rsa
-      - name: Copy package files to Git Docker image
-        run: cp -R sfdx-cli/. ./.github/actions/aur/
-      - name: Handle AUR Git repository
-        uses: ./.github/actions/aur
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Copy private key to Git Docker image
+  #       run: echo "${{ secrets.AUR_PRIVATE_KEY }}" > ./.github/actions/aur/id_rsa
+  #     - name: Copy package files to Git Docker image
+  #       run: cp -R sfdx-cli/. ./.github/actions/aur/
+  #     - name: Handle AUR Git repository
+  #       uses: ./.github/actions/aur

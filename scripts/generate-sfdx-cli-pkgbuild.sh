@@ -5,11 +5,9 @@ set -euf -o pipefail
 OUTPUT_DIR=${1:-`pwd`}
 
 # Get and parse the manifest file from Salesforce
-manifest_content=$(curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx-cli/channels/stable/linux-x64)
-sfdx_original_version=$(echo "$manifest_content" | jq '.version')
-# PKGBUILD pkgver does not accept dash, so we convert that to underscore
-sfdx_version=${sfdx_original_version//-/_}
-sfdx_download_x86_64_url=https://developer.salesforce.com/media/salesforce-cli/sfdx-cli/channels/stable/sfdx-cli-linux-x64.tar.gz
+manifest_content=$(curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64-buildmanifest)
+sfdx_version=$(echo "$manifest_content" | jq '.version')
+sfdx_download_x86_64_url=$(echo "$manifest_content" | jq '.gz')
 sfdx_download_x86_64_sha256=$(echo "$manifest_content" | jq '.sha256gz')
 
 # Generate PKGBUILD based on template
@@ -36,7 +34,7 @@ package() {
 
     install -dm 755 "\${pkgdir}"/opt
     install -dm 755 "\${pkgdir}"/usr/bin
-    sfdx_dir="sfdx-cli-v${sfdx_original_version}-linux-\${_arch}"
+    sfdx_dir="sfdx"
     cp -a "\${sfdx_dir}" "\${pkgdir}"/opt/sfdx-cli
     ln -s /opt/sfdx-cli/bin/sfdx "\${pkgdir}"/usr/bin/sfdx
 }

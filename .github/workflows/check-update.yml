@@ -3,6 +3,7 @@ name: Check new SFDX version
 on:
   repository_dispatch:
     types: manual-sfdx-update
+  workflow_dispatch:
   schedule:
     - cron: '0 2 * * *'
 

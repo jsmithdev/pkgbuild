@@ -10,6 +10,16 @@ sfdx_version=$(echo "$manifest_content" | jq '.version')
 sfdx_download_x86_64_url=$(echo "$manifest_content" | jq '.gz')
 sfdx_download_x86_64_sha256=$(echo "$manifest_content" | jq '.sha256gz')
 
+if [ -f "${OUTPUT_DIR}/PKGBUILD" ]; then
+    current_version=$(grep "pkgver=" "${OUTPUT_DIR}/PKGBUILD" | cut -d'=' -f2)
+    if [ "$current_version" = "$sfdx_version" ]; then
+        # In case we want to bump the pkgrel version manually to fix something,
+        # we don't want this script to overwrite that pkgrel back to 1, so we
+        # will short circuit the script
+        exit 0
+    fi
+fi
+
 # Generate PKGBUILD based on template
 cat << EOF > "${OUTPUT_DIR}/PKGBUILD"
 # Maintainer: Dang Mai <contact at dangmai dot net>
@@ -37,6 +47,7 @@ package() {
     sfdx_dir="sfdx"
     cp -a "\${sfdx_dir}" "\${pkgdir}"/opt/sfdx-cli
     ln -s /opt/sfdx-cli/bin/sfdx "\${pkgdir}"/usr/bin/sfdx
+    ln -s /opt/sfdx-cli/bin/sf "\${pkgdir}"/usr/bin/sf
 }
 sha256sums_x86_64=(${sfdx_download_x86_64_sha256})
 EOF

@@ -5,10 +5,13 @@ set -euf -o pipefail
 OUTPUT_DIR=${1:-`pwd`}
 
 # Get and parse the manifest file from Salesforce
-manifest_content=$(curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64-buildmanifest)
-sfdx_version=$(echo "$manifest_content" | jq '.version')
-sfdx_download_x86_64_url=$(echo "$manifest_content" | jq '.gz')
-sfdx_download_x86_64_sha256=$(echo "$manifest_content" | jq '.sha256gz')
+x64_manifest_content=$(curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64-buildmanifest)
+sfdx_version=$(echo "$x64_manifest_content" | jq '.version')
+sfdx_download_x86_64_url=$(echo "$x64_manifest_content" | jq '.gz')
+sfdx_download_x86_64_sha256=$(echo "$x64_manifest_content" | jq '.sha256gz')
+arm_manifest_content=$(curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-arm-buildmanifest)
+sfdx_download_arm_url=$(echo "$arm_manifest_content" | jq '.gz')
+sfdx_download_arm_sha256=$(echo "$arm_manifest_content" | jq '.sha256gz')
 
 if [ -f "${OUTPUT_DIR}/PKGBUILD" ]; then
     current_version=$(grep "pkgver=" "${OUTPUT_DIR}/PKGBUILD" | cut -d'=' -f2)
@@ -37,6 +40,7 @@ provides=('sfdx-cli')
 options=(!strip)
 conflicts=()
 source_x86_64=(${sfdx_download_x86_64_url})
+source_arm=(${sfdx_download_arm_url})
 
 package() {
     _arch="x64"
@@ -50,4 +54,5 @@ package() {
     ln -s /opt/sfdx-cli/bin/sf "\${pkgdir}"/usr/bin/sf
 }
 sha256sums_x86_64=(${sfdx_download_x86_64_sha256})
+sha256sums_arm=(${sfdx_download_arm_sha256})
 EOF

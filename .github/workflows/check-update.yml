@@ -5,7 +5,7 @@ on:
     types: manual-sfdx-update
   workflow_dispatch:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: "0 2 * * *"
 
 jobs:
   update:
@@ -15,6 +15,8 @@ jobs:
       - name: Generate PKGBUILD
         id: generate-pkgbuild
         run: cd sfdx-cli && ../scripts/generate-sfdx-cli-pkgbuild.sh
+      - name: Debug print new PKGBUILD
+        run: cat sfdx-cli/PKGBUILD
       - name: Copy PKGBUILD to Docker context directory
         run: cp sfdx-cli/PKGBUILD .github/actions/generate-srcinfo/PKGBUILD
       - name: Generate SRCINFO in Docker
@@ -27,8 +29,8 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3.5.0
         with:
-          commit-message: 'Updated sfdx-cli to version ${{ steps.generate-srcinfo.outputs.version }}'
-          title: 'Update sfdx-cli'
+          commit-message: "Updated sfdx-cli to version ${{ steps.generate-srcinfo.outputs.version }}"
+          title: "Update sfdx-cli"
           branch: updates/sfdx-cli
           labels: sfdx-cli
           token: ${{ secrets.PERSONAL_TOKEN }}

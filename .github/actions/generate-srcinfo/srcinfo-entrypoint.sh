@@ -2,6 +2,7 @@
 set -euxo pipefail
 
 cd /home/builduser
+cat PKGBUILD
 SRCINFO=$(makepkg --printsrcinfo)
 VERSION=$(echo "${SRCINFO}" | grep "pkgver" | cut -f2 -d '=' | xargs)
 # Escape multiline strings, see:

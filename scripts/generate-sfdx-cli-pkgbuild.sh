@@ -43,7 +43,6 @@ source_x86_64=(${sfdx_download_x86_64_url})
 source_arm=(${sfdx_download_arm_url})
 
 package() {
-    _arch="x64"
     cd "\${srcdir}"
 
     install -dm 755 "\${pkgdir}"/opt

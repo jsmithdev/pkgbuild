@@ -26,6 +26,7 @@ fi
 # Generate PKGBUILD based on template
 cat << EOF > "${OUTPUT_DIR}/PKGBUILD"
 # Maintainer: Jamie Smith <aur at jsmith dot dev>
+# Contributor: Dang Mai <contact at dangmai dot net>
 
 pkgname=sf-cli
 pkgver=${sf_version}
@@ -48,9 +49,9 @@ package() {
     install -dm 755 "\${pkgdir}"/opt
     install -dm 755 "\${pkgdir}"/usr/bin
     sf_dir="sf"
-    cp -a "\$sf_dir}" "\${pkgdir}"/opt/sf-cli
-    ln -s /opt/sf-cli/bin/sf "\${pkgdir}"/usr/bin/sf
-    ln -s /opt/sf-cli/bin/sf "\${pkgdir}"/usr/bin/sf
+    cp -a "\${sf_dir}" "\${pkgdir}"/opt/sf-cli
+    ln -s /opt/sfdx-cli/bin/sfdx "\${pkgdir}"/usr/bin/sfdx
+    ln -s /opt/sfdx-cli/bin/sf "\${pkgdir}"/usr/bin/sf
 }
 sha256sums_x86_64=(${sf_download_x86_64_sha256})
 sha256sums_arm=(${sf_download_arm_sha256})

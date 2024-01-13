@@ -1,6 +1,6 @@
 pkgbase = sf-cli
-	pkgdesc = The Salesforce CLI simplifies development and build automation when working with your Salesforce org
-	pkgver = 7.209.6
+	pkgdesc = The Salesforce CLI for development and build automation when working with a Salesforce org
+	pkgver = 2.23.20
 	pkgrel = 1
 	url = https://developer.salesforce.com/tools/salesforcecli
 	arch = x86_64
